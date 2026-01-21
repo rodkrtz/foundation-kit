@@ -1,6 +1,6 @@
 package com.rodkrtz.foundationkit.aggregate
 
-import com.rodkrtz.foundationkit.exception.ConcurrencyException
+import com.rodkrtz.foundationkit.exception.domain.ConcurrencyException
 
 /**
  * Aggregate root with optimistic locking support.

@@ -1,6 +1,6 @@
 package com.rodkrtz.foundationkit.common
 
-import com.rodkrtz.foundationkit.exception.DomainException
+import com.rodkrtz.foundationkit.exception.domain.DomainException
 
 /**
  * Result wrapper for operations that can succeed or fail.

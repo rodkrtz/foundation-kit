@@ -1,4 +1,4 @@
-package com.rodkrtz.foundationkit.exception
+package com.rodkrtz.foundationkit.exception.domain
 
 /**
  * Exception thrown when a business rule is violated.

@@ -1,4 +1,4 @@
-package com.rodkrtz.foundationkit.exception
+package com.rodkrtz.foundationkit.exception.domain
 
 /**
  * Base exception for "not found" errors.

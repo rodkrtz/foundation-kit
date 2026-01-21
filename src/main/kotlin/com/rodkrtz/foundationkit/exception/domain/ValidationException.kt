@@ -1,4 +1,4 @@
-package com.rodkrtz.foundationkit.exception
+package com.rodkrtz.foundationkit.exception.domain
 
 /**
  * Exception thrown when data validation fails.
@@ -38,7 +38,7 @@ package com.rodkrtz.foundationkit.exception
 class ValidationException(
     message: String,
     val errors: Map<String, List<String>> = emptyMap()
-) : DomainException(message) { 
+) : DomainException(message) {
     /**
      * Convenience constructor for single errors per field.
      *
