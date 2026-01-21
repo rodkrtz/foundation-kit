@@ -1,0 +1,161 @@
+# Foundation Kit - .gitignore
+
+#######################
+# Gradle
+#######################
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+gradle-app.setting
+.gradletasknamecache
+
+#######################
+# IntelliJ IDEA
+#######################
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.idea_modules/
+
+# IMPORTANT: All .idea/ content should be ignored
+# Including vcs.xml, workspace.xml, etc.
+.idea/*
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+
+#######################
+# Eclipse
+#######################
+.classpath
+.project
+.settings/
+bin/
+
+#######################
+# VS Code
+#######################
+.vscode/
+*.code-workspace
+
+#######################
+# Kotlin
+#######################
+.kotlin/
+
+#######################
+# Compiled files
+#######################
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.kotlin_module
+*.kotlin_builtins
+
+# Keep gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+#######################
+# Logs
+#######################
+*.log
+logs/
+
+#######################
+# OS Files
+#######################
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*~
+.directory
+
+#######################
+# Temporary files
+#######################
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+#######################
+# Build outputs
+#######################
+target/
+dist/
+lib/
+
+#######################
+# Test outputs
+#######################
+test-output/
+test-results/
+*.hprof
+
+#######################
+# Coverage
+#######################
+.coverage/
+htmlcov/
+coverage/
+*.lcov
+jacoco/
+
+#######################
+# Database
+#######################
+*.db
+*.sqlite
+*.sqlite3
+
+#######################
+# Environment
+#######################
+.env
+.env.local
+.env.*.local
+local.properties
+
+#######################
+# Credentials
+#######################
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+#######################
+# Maven
+#######################
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+#######################
+# Project specific
+#######################
+*-backup-*/
+*backup*/
+migrate-*.sh
+fix-*.sh
+reorganizar-*.sh
+RELATORIO_ANALISE.md
+
+# Old project names
+ddd-core/
+foundation/
