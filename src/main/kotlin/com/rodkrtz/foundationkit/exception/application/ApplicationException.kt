@@ -1,5 +1,7 @@
 package com.rodkrtz.foundationkit.exception.application
 
+import com.rodkrtz.foundationkit.exception.FoundationKitException
+
 /**
  * Base exception for application layer errors.
  *
@@ -13,23 +15,8 @@ package com.rodkrtz.foundationkit.exception.application
  * @property message Error message describing what went wrong
  * @property cause Original exception that caused this error, if any
  *
- * Example usage:
- * ```kotlin
- * class PlaceOrderHandler {
- *     fun handle(command: PlaceOrderCommand): Order {
- *         if (command.items.isEmpty()) {
- *             throw CommandValidationException(
- *                 message = "Command validation failed",
- *                 commandType = "PlaceOrderCommand",
- *                 errors = mapOf("items" to listOf("Cannot be empty"))
- *             )
- *         }
- *         // ...
- *     }
- * }
- * ```
  */
 abstract class ApplicationException(
     message: String,
     cause: Throwable? = null
-) : RuntimeException(message, cause)
+) : FoundationKitException(message, cause)

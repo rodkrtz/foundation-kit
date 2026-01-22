@@ -1,5 +1,7 @@
 package com.rodkrtz.foundationkit.exception.domain
 
+import com.rodkrtz.foundationkit.exception.FoundationKitException
+
 /**
  * Base exception for all domain-related errors.
  *
@@ -22,4 +24,4 @@ package com.rodkrtz.foundationkit.exception.domain
 open class DomainException(
     message: String,
     cause: Throwable? = null
-) : RuntimeException(message, cause)
+) : FoundationKitException(message, cause)

@@ -1,5 +1,7 @@
 package com.rodkrtz.foundationkit.exception.infrastructure
 
+import com.rodkrtz.foundationkit.exception.FoundationKitException
+
 /**
  * Base exception for infrastructure layer errors.
  *
@@ -13,24 +15,8 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * @property message Error message describing what went wrong
  * @property cause Original exception that caused this error, if any
  *
- * Example usage:
- * ```kotlin
- * class PostgresOrderRepository : OrderRepository {
- *     override fun save(order: Order): Order {
- *         try {
- *             // database operations
- *             return order
- *         } catch (e: SQLException) {
- *             throw DatabaseException(
- *                 message = "Failed to save order to database",
- *                 cause = e
- *             )
- *         }
- *     }
- * }
- * ```
  */
 abstract class InfrastructureException(
     message: String,
     cause: Throwable? = null
-) : RuntimeException(message, cause)
+) : FoundationKitException(message, cause)
