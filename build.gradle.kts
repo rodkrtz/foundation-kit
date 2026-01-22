@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.rodkrtz"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -25,7 +25,7 @@ tasks.test {
 
 // Dokka configuration for API documentation
 tasks.dokkaHtml.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
+    outputDirectory.set(layout.buildDirectory.dir("dokka"))
     
     dokkaSourceSets {
         configureEach {
@@ -47,7 +47,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "com.rodkrtz"
             artifactId = "foundation-kit"
-            version = "1.0.0"
+            version = "1.1.0"
             
             from(components["java"])
             
@@ -66,7 +66,7 @@ publishing {
                 developers {
                     developer {
                         id.set("rodkrtz")
-                        name.set("Rodrigo Kurtz")
+                        name.set("Rodrigo Kreutzfeld")
                     }
                 }
                 
