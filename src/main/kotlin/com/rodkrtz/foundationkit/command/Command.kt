@@ -128,13 +128,13 @@ import java.util.UUID
  * }
  * ```
  */
-interface Command {
+public interface Command {
     /**
      * Unique identifier for this command instance.
      * WARNING: Default implementation generates a new UUID on each access.
      * Override with a stored value in implementations.
      */
-    val commandId: String
+    public val commandId: String
         get() = UUID.randomUUID().toString()
 
     /**
@@ -142,6 +142,6 @@ interface Command {
      * WARNING: Default implementation generates current time on each access.
      * Override with a stored value in implementations.
      */
-    val timestamp: Instant
+    public val timestamp: Instant
         get() = Instant.now()
 }

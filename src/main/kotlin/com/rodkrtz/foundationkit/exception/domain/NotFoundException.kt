@@ -16,6 +16,6 @@ package com.rodkrtz.foundationkit.exception.domain
  *
  * @param message Description of what was not found
  */
-open class NotFoundException(
+public class NotFoundException(
     message: String
 ) : DomainException(message)

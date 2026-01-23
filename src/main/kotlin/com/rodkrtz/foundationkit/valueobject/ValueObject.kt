@@ -18,4 +18,4 @@ package com.rodkrtz.foundationkit.valueobject
  *
  * Examples: Money, Email, DateRange, Coordinates, Address
  */
-interface ValueObject
+public interface ValueObject

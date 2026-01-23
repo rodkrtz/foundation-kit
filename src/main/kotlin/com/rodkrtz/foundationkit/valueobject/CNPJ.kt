@@ -13,13 +13,11 @@ package com.rodkrtz.foundationkit.valueobject
  * @property value The CNPJ string (formatted or unformatted)
  * @throws IllegalArgumentException if CNPJ is invalid
  */
-data class CNPJ(val value: String) : ValueObject {
+public data class CNPJ(val value: String) : ValueObject {
 
-    private val cleanedValue: String
+    private val cleanedValue: String = value.replace(Regex("[^0-9]"), "")
 
     init {
-        cleanedValue = value.replace(Regex("[^0-9]"), "")
-
         require(cleanedValue.length == 14) {
             "CNPJ must have 14 digits. Got: ${cleanedValue.length}"
         }
@@ -38,7 +36,7 @@ data class CNPJ(val value: String) : ValueObject {
      *
      * @return Formatted CNPJ string
      */
-    fun formatted(): String {
+    public fun formatted(): String {
         return "${cleanedValue.substring(0, 2)}.${cleanedValue.substring(2, 5)}.${cleanedValue.substring(5, 8)}/${cleanedValue.substring(8, 12)}-${cleanedValue.substring(12, 14)}"
     }
 
@@ -47,7 +45,7 @@ data class CNPJ(val value: String) : ValueObject {
      *
      * @return CNPJ with only digits (14 characters)
      */
-    fun digitsOnly(): String = cleanedValue
+    public fun digitsOnly(): String = cleanedValue
 
     /**
      * Returns the root of the CNPJ (first 8 digits).
@@ -56,7 +54,7 @@ data class CNPJ(val value: String) : ValueObject {
      *
      * @return Root string (8 digits)
      */
-    fun root(): String = cleanedValue.substring(0, 8)
+    public fun root(): String = cleanedValue.substring(0, 8)
 
     /**
      * Returns the branch number (4 digits after root).
@@ -66,18 +64,18 @@ data class CNPJ(val value: String) : ValueObject {
      *
      * @return Branch string (4 digits)
      */
-    fun branch(): String = cleanedValue.substring(8, 12)
+    public fun branch(): String = cleanedValue.substring(8, 12)
 
     /**
      * Checks if this CNPJ represents the company headquarters (branch 0001).
      *
      * @return true if this is the headquarters
      */
-    fun isHeadquarters(): Boolean = branch() == "0001"
+    public fun isHeadquarters(): Boolean = branch() == "0001"
 
     override fun toString(): String = formatted()
 
-    companion object {
+    public companion object {
         /**
          * Checks if all digits in the CNPJ are the same.
          * CNPJs like 11.111.111/1111-11 are invalid.
@@ -124,7 +122,7 @@ data class CNPJ(val value: String) : ValueObject {
          * @param value The CNPJ string to parse
          * @return CNPJ instance if valid, null otherwise
          */
-        fun tryParse(value: String): CNPJ? {
+        public fun tryParse(value: String): CNPJ? {
             return try {
                 CNPJ(value)
             } catch (e: IllegalArgumentException) {
@@ -137,7 +135,7 @@ data class CNPJ(val value: String) : ValueObject {
          *
          * @return A valid random CNPJ instance
          */
-        fun random(): CNPJ {
+        public fun random(): CNPJ {
             val random = java.util.Random()
             val base = (0..11).map { random.nextInt(10) }.joinToString("")
 

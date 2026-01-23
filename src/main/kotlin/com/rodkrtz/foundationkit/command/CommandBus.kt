@@ -18,7 +18,7 @@ package com.rodkrtz.foundationkit.command
  * val user = commandBus.dispatch(command)
  * ```
  */
-interface CommandBus {
+public interface CommandBus {
     /**
      * Dispatches a command to its registered handler.
      *
@@ -28,5 +28,5 @@ interface CommandBus {
      * @return The result from the command handler
      * @throws IllegalStateException if no handler is registered for the command
      */
-    fun <C : Command, R> dispatch(command: C): R
+    public fun <C : Command, R> dispatch(command: C): R
 }

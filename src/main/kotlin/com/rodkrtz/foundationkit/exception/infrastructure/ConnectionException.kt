@@ -20,10 +20,10 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class ConnectionException(
+public class ConnectionException(
     message: String,
-    val host: String,
-    val port: Int,
+    public val host: String,
+    public val port: Int,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause) {
 

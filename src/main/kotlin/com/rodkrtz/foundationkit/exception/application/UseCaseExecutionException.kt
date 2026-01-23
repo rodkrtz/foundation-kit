@@ -15,8 +15,8 @@ package com.rodkrtz.foundationkit.exception.application
  * )
  * ```
  */
-class UseCaseExecutionException(
+public class UseCaseExecutionException(
     message: String,
-    val useCaseName: String,
+    public val useCaseName: String,
     cause: Throwable? = null
 ) : ApplicationException(message, cause)

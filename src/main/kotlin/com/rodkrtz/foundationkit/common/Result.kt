@@ -88,14 +88,14 @@ import com.rodkrtz.foundationkit.exception.domain.DomainException
  *
  * @param T The type of value on success
  */
-sealed class Result<out T> {
+public sealed class Result<out T> {
 
     /**
      * Represents a successful operation with a value.
      *
      * @property value The successful result value
      */
-    data class Success<T>(val value: T) : Result<T>()
+    public data class Success<T>(val value: T) : Result<T>()
 
     /**
      * Represents a failed operation with an error.
@@ -103,7 +103,7 @@ sealed class Result<out T> {
      * @property error The domain exception that caused the failure
      * @property errors Optional list of additional error messages
      */
-    data class Failure(
+    public data class Failure(
         val error: DomainException,
         val errors: List<String> = emptyList()
     ) : Result<Nothing>()
@@ -113,21 +113,21 @@ sealed class Result<out T> {
      *
      * @return true if Success, false if Failure
      */
-    fun isSuccess(): Boolean = this is Success
+    public fun isSuccess(): Boolean = this is Success
 
     /**
      * Checks if this result is a failure.
      *
      * @return true if Failure, false if Success
      */
-    fun isFailure(): Boolean = this is Failure
+    public fun isFailure(): Boolean = this is Failure
 
     /**
      * Returns the value if Success, or null if Failure.
      *
      * @return The value or null
      */
-    fun getOrNull(): T? = when (this) {
+    public fun getOrNull(): T? = when (this) {
         is Success -> value
         is Failure -> null
     }
@@ -138,7 +138,7 @@ sealed class Result<out T> {
      * @return The value
      * @throws DomainException if this is a Failure
      */
-    fun getOrThrow(): T = when (this) {
+    public fun getOrThrow(): T = when (this) {
         is Success -> value
         is Failure -> throw error
     }
@@ -151,7 +151,7 @@ sealed class Result<out T> {
      * @param transform Function to transform the success value
      * @return Result with transformed value or original failure
      */
-    inline fun <R> map(transform: (T) -> R): Result<R> = when (this) {
+    public inline fun <R> map(transform: (T) -> R): Result<R> = when (this) {
         is Success -> Success(transform(value))
         is Failure -> this
     }
@@ -165,19 +165,19 @@ sealed class Result<out T> {
      * @param transform Function that transforms value to another Result
      * @return Result from the transform or original failure
      */
-    inline fun <R> flatMap(transform: (T) -> Result<R>): Result<R> = when (this) {
+    public inline fun <R> flatMap(transform: (T) -> Result<R>): Result<R> = when (this) {
         is Success -> transform(value)
         is Failure -> this
     }
 
-    companion object {
+    public companion object {
         /**
          * Creates a successful Result with the given value.
          *
          * @param value The success value
          * @return Success result
          */
-        fun <T> success(value: T): Result<T> = Success(value)
+        public fun <T> success(value: T): Result<T> = Success(value)
 
         /**
          * Creates a failed Result with the given error.
@@ -186,7 +186,7 @@ sealed class Result<out T> {
          * @param errors Optional list of additional error messages
          * @return Failure result
          */
-        fun failure(error: DomainException, errors: List<String> = emptyList()): Result<Nothing> =
+        public fun failure(error: DomainException, errors: List<String> = emptyList()): Result<Nothing> =
             Failure(error, errors)
     }
 }

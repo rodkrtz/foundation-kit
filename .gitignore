@@ -149,13 +149,4 @@ pom.xml.versionsBackup
 #######################
 # Project specific
 #######################
-*-backup-*/
-*backup*/
-migrate-*.sh
-fix-*.sh
-reorganizar-*.sh
-RELATORIO_ANALISE.md
-
-# Old project names
-ddd-core/
-foundation/
+/qodana.yaml

@@ -117,7 +117,7 @@ package com.rodkrtz.foundationkit.repository.json
  * @property data Domain-specific data stored as JSON
  * @property metadata Audit and versioning information
  */
-data class JsonData<ID, DATA>(
+public data class JsonData<ID, DATA>(
     val id: ID,
     val data: DATA,
     val metadata: Metadata
@@ -132,7 +132,7 @@ data class JsonData<ID, DATA>(
      * @param updatedBy Optional identifier of who updated the data
      * @return New JsonData with updated data and metadata
      */
-    fun updateData(newData: DATA, updatedBy: String? = null): JsonData<ID, DATA> {
+    public fun updateData(newData: DATA, updatedBy: String? = null): JsonData<ID, DATA> {
         return copy(
             data = newData,
             metadata = metadata.incrementVersion().let {
@@ -150,7 +150,7 @@ data class JsonData<ID, DATA>(
      * @param deletedBy Optional identifier of who deleted the data
      * @return New JsonData marked as deleted
      */
-    fun softDelete(deletedBy: String? = null): JsonData<ID, DATA> {
+    public fun softDelete(deletedBy: String? = null): JsonData<ID, DATA> {
         return copy(
             metadata = metadata.markAsDeleted(deletedBy)
         )
@@ -161,12 +161,12 @@ data class JsonData<ID, DATA>(
      *
      * @return true if marked as deleted
      */
-    fun isDeleted(): Boolean = metadata.deleted
+    public fun isDeleted(): Boolean = metadata.deleted
 
     /**
      * Gets the current version number for optimistic locking.
      *
      * @return Current version number
      */
-    fun getVersion(): Long = metadata.version
+    public fun getVersion(): Long = metadata.version
 }

@@ -158,7 +158,7 @@ import java.util.UUID
  *
  * @param R The type of result returned by this query
  */
-interface Query<R> {
+public interface Query<R> {
     /**
      * Unique identifier for this query instance.
      * WARNING: Default implementation generates a new UUID on each access.
@@ -166,6 +166,6 @@ interface Query<R> {
      *
      * @return Unique query identifier
      */
-    val queryId: String
+    public val queryId: String
         get() = UUID.randomUUID().toString()
 }

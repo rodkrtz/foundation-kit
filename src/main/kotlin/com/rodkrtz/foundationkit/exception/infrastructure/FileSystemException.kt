@@ -20,10 +20,10 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class FileSystemException(
+public class FileSystemException(
     message: String,
-    val path: String,
-    val operation: String,
+    public val path: String,
+    public val operation: String,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause) {
 

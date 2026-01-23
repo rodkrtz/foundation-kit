@@ -22,11 +22,11 @@ package com.rodkrtz.foundationkit.exception.application
  * }
  * ```
  */
-class AuthorizationException(
+public class AuthorizationException(
     message: String,
-    val userId: String,
-    val resource: String,
-    val action: String
+    public val userId: String,
+    public val resource: String,
+    public val action: String
 ) : ApplicationException(message) {
 
     override fun toString(): String =

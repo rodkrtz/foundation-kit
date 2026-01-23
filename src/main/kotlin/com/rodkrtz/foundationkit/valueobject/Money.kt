@@ -13,7 +13,7 @@ import java.math.BigDecimal
  *
  * @throws IllegalArgumentException if amount is negative or currency code is invalid
  */
-data class Money(
+public data class Money(
     val amount: BigDecimal,
     val currency: String = "BRL"
 ) : ValueObject {
@@ -30,7 +30,7 @@ data class Money(
      * @return A new Money with the sum of amounts
      * @throws IllegalArgumentException if currencies differ
      */
-    operator fun plus(other: Money): Money {
+    public operator fun plus(other: Money): Money {
         requireSameCurrency(other)
         return Money(amount + other.amount, currency)
     }
@@ -42,7 +42,7 @@ data class Money(
      * @return A new Money with the difference
      * @throws IllegalArgumentException if currencies differ or result would be negative
      */
-    operator fun minus(other: Money): Money {
+    public operator fun minus(other: Money): Money {
         requireSameCurrency(other)
         return Money(amount - other.amount, currency)
     }
@@ -53,7 +53,7 @@ data class Money(
      * @param multiplier The multiplier
      * @return A new Money with the multiplied amount
      */
-    operator fun times(multiplier: BigDecimal): Money {
+    public operator fun times(multiplier: BigDecimal): Money {
         return Money(amount * multiplier, currency)
     }
 
@@ -63,7 +63,7 @@ data class Money(
      * @param multiplier The multiplier
      * @return A new Money with the multiplied amount
      */
-    operator fun times(multiplier: Int): Money {
+    public operator fun times(multiplier: Int): Money {
         return Money(amount * multiplier.toBigDecimal(), currency)
     }
 
@@ -85,7 +85,7 @@ data class Money(
      * @return true if this amount is greater
      * @throws IllegalArgumentException if currencies differ
      */
-    fun isGreaterThan(other: Money): Boolean {
+    public fun isGreaterThan(other: Money): Boolean {
         requireSameCurrency(other)
         return amount > other.amount
     }
@@ -97,14 +97,14 @@ data class Money(
      * @return true if this amount is less
      * @throws IllegalArgumentException if currencies differ
      */
-    fun isLessThan(other: Money): Boolean {
+    public fun isLessThan(other: Money): Boolean {
         requireSameCurrency(other)
         return amount < other.amount
     }
 
-    companion object {
+    public companion object {
         /** Zero money in BRL */
-        val ZERO = Money(BigDecimal.ZERO)
+        public val ZERO: Money = Money(BigDecimal.ZERO)
 
         /**
          * Creates Money from a Double value.
@@ -113,7 +113,7 @@ data class Money(
          * @param currency ISO 4217 currency code (default: "BRL")
          * @return A new Money instance
          */
-        fun of(amount: Double, currency: String = "BRL") =
+        public fun of(amount: Double, currency: String = "BRL"): Money =
             Money(amount.toBigDecimal(), currency)
 
         /**
@@ -123,7 +123,7 @@ data class Money(
          * @param currency ISO 4217 currency code (default: "BRL")
          * @return A new Money instance
          */
-        fun of(amount: String, currency: String = "BRL") =
+        public fun of(amount: String, currency: String = "BRL"): Money =
             Money(BigDecimal(amount), currency)
     }
 }

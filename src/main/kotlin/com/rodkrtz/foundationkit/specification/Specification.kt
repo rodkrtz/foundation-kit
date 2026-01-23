@@ -69,14 +69,14 @@ package com.rodkrtz.foundationkit.specification
  *
  * @param T The type of object to evaluate against this specification
  */
-interface Specification<T> {
+public interface Specification<T> {
     /**
      * Checks if a candidate object satisfies this specification.
      *
      * @param candidate The object to evaluate
      * @return true if the candidate satisfies this specification
      */
-    fun isSatisfiedBy(candidate: T): Boolean
+    public fun isSatisfiedBy(candidate: T): Boolean
 
     /**
      * Combines this specification with another using logical AND.
@@ -86,7 +86,7 @@ interface Specification<T> {
      * @param other The specification to combine with
      * @return A new specification representing AND operation
      */
-    fun and(other: Specification<T>): Specification<T> =
+    public fun and(other: Specification<T>): Specification<T> =
         AndSpecification(this, other)
 
     /**
@@ -97,7 +97,7 @@ interface Specification<T> {
      * @param other The specification to combine with
      * @return A new specification representing OR operation
      */
-    fun or(other: Specification<T>): Specification<T> =
+    public fun or(other: Specification<T>): Specification<T> =
         OrSpecification(this, other)
 
     /**
@@ -107,7 +107,7 @@ interface Specification<T> {
      *
      * @return A new specification representing NOT operation
      */
-    fun not(): Specification<T> =
+    public fun not(): Specification<T> =
         NotSpecification(this)
 }
 

@@ -33,11 +33,11 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class ExternalServiceException(
+public class ExternalServiceException(
     message: String,
-    val serviceName: String,
-    val statusCode: Int? = null,
-    val responseBody: String? = null,
+    public val serviceName: String,
+    public val statusCode: Int? = null,
+    public val responseBody: String? = null,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause) {
 

@@ -13,7 +13,7 @@ import kotlin.math.*
  *
  * @throws IllegalArgumentException if latitude or longitude are out of valid range
  */
-data class Coordinates(
+public data class Coordinates(
     val latitude: Double,
     val longitude: Double
 ) : ValueObject {
@@ -36,7 +36,7 @@ data class Coordinates(
      * @param other The target coordinate
      * @return Distance in kilometers
      */
-    fun distanceTo(other: Coordinates): Double {
+    public fun distanceTo(other: Coordinates): Double {
         val earthRadiusKm = 6371.0
 
         val dLat = (other.latitude - latitude).toRadians()
@@ -60,7 +60,7 @@ data class Coordinates(
      * @param radiusKm The radius in kilometers
      * @return true if this coordinate is within the radius, false otherwise
      */
-    fun isWithinRadius(center: Coordinates, radiusKm: Double): Boolean {
+    public fun isWithinRadius(center: Coordinates, radiusKm: Double): Boolean {
         return distanceTo(center) <= radiusKm
     }
     

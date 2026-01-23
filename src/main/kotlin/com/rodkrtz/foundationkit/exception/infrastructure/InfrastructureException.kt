@@ -16,7 +16,7 @@ import com.rodkrtz.foundationkit.exception.FoundationKitException
  * @property cause Original exception that caused this error, if any
  *
  */
-abstract class InfrastructureException(
+public abstract class InfrastructureException(
     message: String,
     cause: Throwable? = null
 ) : FoundationKitException(message, cause)

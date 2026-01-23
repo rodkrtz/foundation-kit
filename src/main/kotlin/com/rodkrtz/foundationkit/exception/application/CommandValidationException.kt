@@ -22,10 +22,10 @@ package com.rodkrtz.foundationkit.exception.application
  * )
  * ```
  */
-class CommandValidationException(
+public class CommandValidationException(
     message: String,
-    val commandType: String,
-    val errors: Map<String, List<String>> = emptyMap()
+    public val commandType: String,
+    public val errors: Map<String, List<String>> = emptyMap()
 ) : ApplicationException(message) {
 
     override fun toString(): String {

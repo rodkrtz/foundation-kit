@@ -20,7 +20,7 @@ package com.rodkrtz.foundationkit.exception.application
  * }
  * ```
  */
-class TransactionException(
+public class TransactionException(
     message: String,
     cause: Throwable? = null
 ) : ApplicationException(message, cause)

@@ -24,9 +24,9 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class DatabaseException(
+public class DatabaseException(
     message: String,
-    val operation: String? = null,
+    public val operation: String? = null,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause) {
 

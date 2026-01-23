@@ -29,13 +29,13 @@ import com.rodkrtz.foundationkit.event.DomainEvent
  *
  * @param T The specific type of domain event this subscriber handles
  */
-interface EventSubscriber<T : DomainEvent> {
+public interface EventSubscriber<T : DomainEvent> {
     /**
      * Handles a domain event of the subscribed type.
      *
      * @param event The event to handle
      */
-    fun handle(event: T)
+    public fun handle(event: T)
 
     /**
      * Checks if this subscriber is interested in the given event.
@@ -43,5 +43,5 @@ interface EventSubscriber<T : DomainEvent> {
      * @param event The event to check
      * @return true if this subscriber should handle the event
      */
-    fun isSubscribedTo(event: DomainEvent): Boolean
+    public fun isSubscribedTo(event: DomainEvent): Boolean
 }

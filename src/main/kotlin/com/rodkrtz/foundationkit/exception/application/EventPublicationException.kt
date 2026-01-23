@@ -18,8 +18,8 @@ package com.rodkrtz.foundationkit.exception.application
  * }
  * ```
  */
-class EventPublicationException(
+public class EventPublicationException(
     message: String,
-    val eventType: String,
+    public val eventType: String,
     cause: Throwable? = null
 ) : ApplicationException(message, cause)

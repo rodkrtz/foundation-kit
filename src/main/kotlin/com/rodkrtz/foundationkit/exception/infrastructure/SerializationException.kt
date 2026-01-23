@@ -31,10 +31,10 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class SerializationException(
+public class SerializationException(
     message: String,
-    val dataType: String,
-    val operation: String, // "serialization" or "deserialization"
+    public val dataType: String,
+    public val operation: String, // "serialization" or "deserialization"
     cause: Throwable? = null
 ) : InfrastructureException(message, cause) {
 

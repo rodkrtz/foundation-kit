@@ -20,9 +20,9 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class MessageQueueException(
+public class MessageQueueException(
     message: String,
-    val queueName: String,
-    val operation: String,
+    public val queueName: String,
+    public val operation: String,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause)

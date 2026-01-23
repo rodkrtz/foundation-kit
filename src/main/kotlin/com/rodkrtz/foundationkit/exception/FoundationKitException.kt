@@ -73,7 +73,7 @@ package com.rodkrtz.foundationkit.exception
  * @see com.rodkrtz.foundationkit.exception.application.ApplicationException
  * @see com.rodkrtz.foundationkit.exception.infrastructure.InfrastructureException
  */
-abstract class FoundationKitException(
+public abstract class FoundationKitException(
     message: String,
     cause: Throwable? = null
 ) : RuntimeException(message, cause)

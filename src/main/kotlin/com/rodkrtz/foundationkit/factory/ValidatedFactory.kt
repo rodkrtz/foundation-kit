@@ -39,7 +39,7 @@ import com.rodkrtz.foundationkit.aggregate.AggregateRoot
  *
  * @param T The type of aggregate root to create
  */
-abstract class ValidatedFactory<T : AggregateRoot<*>> : Factory<T> {
+public abstract class ValidatedFactory<T : AggregateRoot<*>> : Factory<T> {
 
     /**
      * Validates preconditions for aggregate creation.

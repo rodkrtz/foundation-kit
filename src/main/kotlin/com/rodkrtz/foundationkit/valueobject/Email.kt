@@ -9,7 +9,7 @@ package com.rodkrtz.foundationkit.valueobject
  * @property value The email address string
  * @throws IllegalArgumentException if email is blank, invalid format, or too long
  */
-data class Email(val value: String) : ValueObject {
+public data class Email(val value: String) : ValueObject {
 
     init {
         require(value.isNotBlank()) {
@@ -28,25 +28,25 @@ data class Email(val value: String) : ValueObject {
      *
      * @return The domain string (e.g., "example.com")
      */
-    fun domain(): String = value.substringAfter('@')
+    public fun domain(): String = value.substringAfter('@')
 
     /**
      * Returns the local part of the email (before @).
      *
      * @return The local part string (e.g., "user")
      */
-    fun localPart(): String = value.substringBefore('@')
+    public fun localPart(): String = value.substringBefore('@')
 
     /**
      * Returns the email in lowercase for case-insensitive comparison.
      *
      * @return Lowercase version of the email
      */
-    fun normalized(): String = value.lowercase()
+    public fun normalized(): String = value.lowercase()
 
     override fun toString(): String = value
 
-    companion object {
+    public companion object {
         /** RFC 5322 simplified regex for email validation */
         private val EMAIL_REGEX = Regex(
             """^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$"""
@@ -58,7 +58,7 @@ data class Email(val value: String) : ValueObject {
          * @param value The email string to parse
          * @return Email instance if valid, null otherwise
          */
-        fun tryParse(value: String): Email? {
+        public fun tryParse(value: String): Email? {
             return try {
                 Email(value)
             } catch (e: IllegalArgumentException) {

@@ -21,9 +21,9 @@ package com.rodkrtz.foundationkit.exception.application
  * }
  * ```
  */
-class QueryExecutionException(
+public class QueryExecutionException(
     message: String,
-    val queryType: String,
+    public val queryType: String,
     cause: Throwable? = null
 ) : ApplicationException(message, cause) {
 

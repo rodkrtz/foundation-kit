@@ -20,9 +20,9 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class CacheException(
+public class CacheException(
     message: String,
-    val key: String,
-    val operation: String,
+    public val key: String,
+    public val operation: String,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause)

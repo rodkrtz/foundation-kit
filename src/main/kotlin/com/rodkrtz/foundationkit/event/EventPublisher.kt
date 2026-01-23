@@ -20,13 +20,13 @@ import com.rodkrtz.foundationkit.event.DomainEvent
  * eventPublisher.publish(event)
  * ```
  */
-interface EventPublisher {
+public interface EventPublisher {
     /**
      * Publishes a single domain event to all subscribers.
      *
      * @param event The event to publish
      */
-    fun publish(event: DomainEvent)
+    public fun publish(event: DomainEvent)
 
     /**
      * Publishes multiple domain events in order.
@@ -36,7 +36,7 @@ interface EventPublisher {
      *
      * @param events The list of events to publish
      */
-    fun publish(events: List<DomainEvent>) {
+    public fun publish(events: List<DomainEvent>) {
         events.forEach { publish(it) }
     }
 }

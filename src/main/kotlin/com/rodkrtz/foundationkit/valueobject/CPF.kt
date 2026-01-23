@@ -13,12 +13,11 @@ package com.rodkrtz.foundationkit.valueobject
  * @property value The CPF string (formatted or unformatted)
  * @throws IllegalArgumentException if CPF is invalid
  */
-data class CPF(val value: String) : ValueObject {
+public data class CPF(val value: String) : ValueObject {
 
-    private val cleanedValue: String
+    private val cleanedValue: String = value.replace(Regex("[^0-9]"), "")
 
     init {
-        cleanedValue = value.replace(Regex("[^0-9]"), "")
 
         require(cleanedValue.length == 11) {
             "CPF must have 11 digits. Got: ${cleanedValue.length}"
@@ -38,7 +37,7 @@ data class CPF(val value: String) : ValueObject {
      *
      * @return Formatted CPF string
      */
-    fun formatted(): String {
+    public fun formatted(): String {
         return "${cleanedValue.substring(0, 3)}.${cleanedValue.substring(3, 6)}.${cleanedValue.substring(6, 9)}-${cleanedValue.substring(9, 11)}"
     }
 
@@ -47,11 +46,11 @@ data class CPF(val value: String) : ValueObject {
      *
      * @return CPF with only digits (11 characters)
      */
-    fun digitsOnly(): String = cleanedValue
+    public fun digitsOnly(): String = cleanedValue
 
     override fun toString(): String = formatted()
 
-    companion object {
+    public companion object {
         /**
          * Checks if all digits in the CPF are the same.
          * CPFs like 111.111.111-11 are invalid.
@@ -96,7 +95,7 @@ data class CPF(val value: String) : ValueObject {
          * @param value The CPF string to parse
          * @return CPF instance if valid, null otherwise
          */
-        fun tryParse(value: String): CPF? {
+        public fun tryParse(value: String): CPF? {
             return try {
                 CPF(value)
             } catch (e: IllegalArgumentException) {
@@ -109,7 +108,7 @@ data class CPF(val value: String) : ValueObject {
          *
          * @return A valid random CPF instance
          */
-        fun random(): CPF {
+        public fun random(): CPF {
             val random = java.util.Random()
             val base = (0..8).map { random.nextInt(10) }.joinToString("")
 

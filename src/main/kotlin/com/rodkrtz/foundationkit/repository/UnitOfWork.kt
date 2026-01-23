@@ -130,14 +130,14 @@ import com.rodkrtz.foundationkit.aggregate.AggregateRoot
  * }
  * ```
  */
-interface UnitOfWork {
+public interface UnitOfWork {
 
     /**
      * Begins a new unit of work (transaction).
      *
      * Should be called before making any changes to aggregates.
      */
-    fun begin()
+    public fun begin()
 
     /**
      * Commits all pending changes atomically.
@@ -147,14 +147,14 @@ interface UnitOfWork {
      *
      * @throws Exception if commit fails
      */
-    fun commit()
+    public fun commit()
 
     /**
      * Rolls back all pending changes.
      *
      * Discards all registered changes without persisting them.
      */
-    fun rollback()
+    public fun rollback()
 
     /**
      * Registers a new aggregate to be inserted.
@@ -163,7 +163,7 @@ interface UnitOfWork {
      *
      * @param aggregate The new aggregate to track
      */
-    fun <T : AggregateRoot<*>> registerNew(aggregate: T)
+    public fun <T : AggregateRoot<*>> registerNew(aggregate: T)
 
     /**
      * Registers a modified aggregate to be updated.
@@ -173,7 +173,7 @@ interface UnitOfWork {
      *
      * @param aggregate The modified aggregate to track
      */
-    fun <T : AggregateRoot<*>> registerDirty(aggregate: T)
+    public fun <T : AggregateRoot<*>> registerDirty(aggregate: T)
 
     /**
      * Registers an aggregate to be deleted.
@@ -183,7 +183,7 @@ interface UnitOfWork {
      *
      * @param aggregate The aggregate to delete
      */
-    fun <T : AggregateRoot<*>> registerDeleted(aggregate: T)
+    public fun <T : AggregateRoot<*>> registerDeleted(aggregate: T)
 }
 
 /**
@@ -193,16 +193,16 @@ interface UnitOfWork {
  * Subclasses need to implement begin(), commit(), and rollback() with
  * actual persistence logic.
  */
-abstract class AbstractUnitOfWork : UnitOfWork {
+public abstract class AbstractUnitOfWork : UnitOfWork {
 
     /** Aggregates to be inserted */
-    protected val newAggregates = mutableListOf<AggregateRoot<*>>()
+    protected val newAggregates: MutableList<AggregateRoot<*>> = mutableListOf()
 
     /** Aggregates to be updated */
-    protected val dirtyAggregates = mutableListOf<AggregateRoot<*>>()
+    protected val dirtyAggregates: MutableList<AggregateRoot<*>> = mutableListOf()
 
     /** Aggregates to be deleted */
-    protected val deletedAggregates = mutableListOf<AggregateRoot<*>>()
+    protected val deletedAggregates: MutableList<AggregateRoot<*>> = mutableListOf()
 
     override fun <T : AggregateRoot<*>> registerNew(aggregate: T) {
         newAggregates.add(aggregate)

@@ -266,12 +266,12 @@ package com.rodkrtz.foundationkit.command
  * @param C The type of command this handler processes
  * @param R The type of result returned after processing
  */
-interface CommandHandler<C : Command, R> {
+public interface CommandHandler<C : Command, R> {
     /**
      * Handles the given command and returns a result.
      *
      * @param command The command to process
      * @return The result of command execution
      */
-    fun handle(command: C): R
+    public fun handle(command: C): R
 }

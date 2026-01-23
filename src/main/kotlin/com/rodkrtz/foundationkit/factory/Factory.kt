@@ -100,11 +100,11 @@ import com.rodkrtz.foundationkit.aggregate.AggregateRoot
  *
  * @param T The type of aggregate root to create
  */
-interface Factory<T : AggregateRoot<*>> {
+public interface Factory<T : AggregateRoot<*>> {
     /**
      * Creates and returns a new aggregate instance.
      *
      * @return A new, fully initialized aggregate root
      */
-    fun create(): T
+    public fun create(): T
 }

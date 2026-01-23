@@ -22,7 +22,7 @@ import com.rodkrtz.foundationkit.aggregate.AggregateRoot
  * @param T The aggregate root type
  * @param ID The aggregate identifier type
  */
-interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
+public interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
 
     /**
      * Persists an aggregate.
@@ -33,7 +33,7 @@ interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
      * @param aggregate The aggregate to persist
      * @return The persisted aggregate (may include generated values)
      */
-    fun save(aggregate: T): T
+    public fun save(aggregate: T): T
 
     /**
      * Finds an aggregate by its identifier.
@@ -41,7 +41,7 @@ interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
      * @param id The aggregate identifier
      * @return The aggregate if found, null otherwise
      */
-    fun findById(id: ID): T?
+    public fun findById(id: ID): T?
 
     /**
      * Retrieves all aggregates.
@@ -51,7 +51,7 @@ interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
      *
      * @return List of all aggregates
      */
-    fun findAll(): List<T>
+    public fun findAll(): List<T>
 
     /**
      * Deletes an aggregate by its identifier.
@@ -61,7 +61,7 @@ interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
      *
      * @param id The identifier of the aggregate to delete
      */
-    fun delete(id: ID)
+    public fun delete(id: ID)
 
     /**
      * Checks if an aggregate exists with the given identifier.
@@ -69,5 +69,5 @@ interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
      * @param id The identifier to check
      * @return true if an aggregate exists, false otherwise
      */
-    fun existsById(id: ID): Boolean
+    public fun existsById(id: ID): Boolean
 }

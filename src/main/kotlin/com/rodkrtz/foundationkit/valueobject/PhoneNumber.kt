@@ -15,12 +15,11 @@ package com.rodkrtz.foundationkit.valueobject
  * @property value The phone number string
  * @throws IllegalArgumentException if phone number is invalid
  */
-data class PhoneNumber(val value: String) : ValueObject {
+public data class PhoneNumber(val value: String) : ValueObject {
 
-    private val cleanedNumber: String
+    private val cleanedNumber: String = value.replace(Regex("[^0-9]"), "")
 
     init {
-        cleanedNumber = value.replace(Regex("[^0-9]"), "")
 
         require(cleanedNumber.isNotBlank()) {
             "Phone number cannot be blank"
@@ -49,21 +48,21 @@ data class PhoneNumber(val value: String) : ValueObject {
      *
      * @return Two-digit area code string
      */
-    fun ddd(): String = cleanedNumber.take(2)
+    public fun ddd(): String = cleanedNumber.take(2)
 
     /**
      * Returns the number without area code.
      *
      * @return Phone number without DDD (8 or 9 digits)
      */
-    fun number(): String = cleanedNumber.drop(2)
+    public fun number(): String = cleanedNumber.drop(2)
 
     /**
      * Checks if this is a mobile number (11 digits total).
      *
      * @return true if mobile, false if landline
      */
-    fun isMobile(): Boolean = cleanedNumber.length == 11
+    public fun isMobile(): Boolean = cleanedNumber.length == 11
 
     /**
      * Returns the formatted phone number.
@@ -73,7 +72,7 @@ data class PhoneNumber(val value: String) : ValueObject {
      *
      * @return Formatted phone number string
      */
-    fun formatted(): String {
+    public fun formatted(): String {
         return if (isMobile()) {
             "(${ddd()}) ${number().take(5)}-${number().drop(5)}"
         } else {
@@ -86,11 +85,11 @@ data class PhoneNumber(val value: String) : ValueObject {
      *
      * @return Phone number with only digits (10 or 11 characters)
      */
-    fun digitsOnly(): String = cleanedNumber
+    public fun digitsOnly(): String = cleanedNumber
 
     override fun toString(): String = formatted()
 
-    companion object {
+    public companion object {
         /** Valid area codes (DDDs) in Brazil */
         private val VALID_DDDS = setOf(
             11, 12, 13, 14, 15, 16, 17, 18, 19, // SP
@@ -133,10 +132,10 @@ data class PhoneNumber(val value: String) : ValueObject {
          * @param value The phone number string to parse
          * @return PhoneNumber instance if valid, null otherwise
          */
-        fun tryParse(value: String): PhoneNumber? {
+        public fun tryParse(value: String): PhoneNumber? {
             return try {
                 PhoneNumber(value)
-            } catch (e: IllegalArgumentException) {
+            } catch (_: IllegalArgumentException) {
                 null
             }
         }

@@ -21,7 +21,7 @@ import com.rodkrtz.foundationkit.exception.FoundationKitException
  * @param message The error message describing what went wrong
  * @param cause Optional underlying cause (another exception)
  */
-open class DomainException(
+public abstract class DomainException(
     message: String,
     cause: Throwable? = null
 ) : FoundationKitException(message, cause)

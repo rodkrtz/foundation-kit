@@ -10,7 +10,7 @@ package com.rodkrtz.foundationkit.repository
  * @property pageSize The number of elements per page
  * @throws IllegalArgumentException if pageNumber < 0, pageSize <= 0, or pageSize > 1000
  */
-data class PageRequest(
+public data class PageRequest(
     val pageNumber: Int = 0,
     val pageSize: Int = 20
 ) {

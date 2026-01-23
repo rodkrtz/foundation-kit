@@ -21,7 +21,7 @@ import java.util.UUID
  *
  * Examples: UserRegistered, OrderPlaced, PaymentProcessed, RideCompleted
  */
-interface DomainEvent {
+public interface DomainEvent {
     /**
      * The timestamp when the event occurred.
      * WARNING: Default implementation generates current time on each access.
@@ -29,7 +29,7 @@ interface DomainEvent {
      *
      * @return The instant when the event occurred
      */
-    val occurredOn: Instant
+    public val occurredOn: Instant
         get() = Instant.now()
 
     /**
@@ -39,6 +39,6 @@ interface DomainEvent {
      *
      * @return Unique event identifier
      */
-    val eventId: String
+    public val eventId: String
         get() = UUID.randomUUID().toString()
 }

@@ -32,7 +32,7 @@ package com.rodkrtz.foundationkit.repository.json
  * @param ID The type of the identifier
  * @param DATA The type of the domain data
  */
-abstract class JsonRepositorySupport<ID, DATA> : JsonRepository<ID, DATA> {
+public abstract class JsonRepositorySupport<ID, DATA> : JsonRepository<ID, DATA> {
 
     /**
      * Performs a soft delete by marking the entity as deleted.

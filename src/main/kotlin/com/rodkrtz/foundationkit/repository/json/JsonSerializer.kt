@@ -28,7 +28,7 @@ package com.rodkrtz.foundationkit.repository.json
  * }
  * ```
  */
-interface JsonSerializer {
+public interface JsonSerializer {
 
     /**
      * Serializes an object to JSON string.
@@ -37,7 +37,7 @@ interface JsonSerializer {
      * @param obj The object to serialize
      * @return JSON string representation
      */
-    fun <T> serialize(obj: T): String
+    public fun <T> serialize(obj: T): String
 
     /**
      * Deserializes a JSON string to an object.
@@ -47,7 +47,8 @@ interface JsonSerializer {
      * @param clazz The class to deserialize to
      * @return The deserialized object
      */
-    fun <T> deserialize(json: String, clazz: Class<T>): T
+    public fun <T> deserialize(json: String, clazz: Class<T>): T
+
 }
 
 /**
@@ -66,6 +67,6 @@ interface JsonSerializer {
  * @param json The JSON string
  * @return The deserialized object
  */
-inline fun <reified T> JsonSerializer.deserialize(json: String): T {
+public inline fun <reified T> JsonSerializer.deserialize(json: String): T {
     return deserialize(json, T::class.java)
 }

@@ -26,14 +26,14 @@ import com.rodkrtz.foundationkit.exception.domain.ConcurrencyException
  *
  * @param ID The type of the aggregate identifier
  */
-abstract class VersionedAggregateRoot<ID : AggregateId<*>> : AggregateRoot<ID>() {
+public abstract class VersionedAggregateRoot<ID : AggregateId<*>> : AggregateRoot<ID>() {
 
     /**
      * Current version number for optimistic locking.
      *
      * Starts at 1 and increments with each update.
      */
-    abstract val version: Long
+    public abstract val version: Long
 
     /**
      * Increments and returns the next version number.
@@ -54,7 +54,7 @@ abstract class VersionedAggregateRoot<ID : AggregateId<*>> : AggregateRoot<ID>()
      * @param expectedVersion The version that was loaded
      * @throws ConcurrencyException if versions don't match
      */
-    fun checkVersion(expectedVersion: Long) {
+    public fun checkVersion(expectedVersion: Long) {
         if (version != expectedVersion) {
             throw ConcurrencyException(
                 aggregateId = id.toString(),

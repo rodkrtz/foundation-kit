@@ -17,7 +17,7 @@ import java.time.Instant
  * @property deleted Flag indicating if the entity is soft-deleted
  * @property deletedAt Timestamp when the entity was soft-deleted (null if not deleted)
  */
-data class Metadata(
+public data class Metadata(
     val createdAt: Instant,
     val updatedAt: Instant,
     val createdBy: String? = null,
@@ -34,7 +34,7 @@ data class Metadata(
      *
      * @return New Metadata with version incremented by 1
      */
-    fun incrementVersion(): Metadata = copy(
+    public fun incrementVersion(): Metadata = copy(
         version = version + 1,
         updatedAt = Instant.now()
     )
@@ -47,7 +47,7 @@ data class Metadata(
      * @param deletedBy Optional identifier of the user performing the deletion
      * @return New Metadata marked as deleted
      */
-    fun markAsDeleted(deletedBy: String? = null): Metadata = copy(
+    public fun markAsDeleted(deletedBy: String? = null): Metadata = copy(
         deleted = true,
         deletedAt = Instant.now(),
         updatedBy = deletedBy
@@ -59,12 +59,12 @@ data class Metadata(
      * @param userId Identifier of the user performing the update
      * @return New Metadata with updated fields
      */
-    fun updateBy(userId: String): Metadata = copy(
+    public fun updateBy(userId: String): Metadata = copy(
         updatedAt = Instant.now(),
         updatedBy = userId
     )
 
-    companion object {
+    public companion object {
         /**
          * Factory method to create initial metadata for a new entity.
          *
@@ -73,7 +73,7 @@ data class Metadata(
          * @param createdBy Optional identifier of the user creating the entity
          * @return New Metadata instance for a new entity
          */
-        fun create(createdBy: String? = null): Metadata = Metadata(
+        public fun create(createdBy: String? = null): Metadata = Metadata(
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
             createdBy = createdBy,

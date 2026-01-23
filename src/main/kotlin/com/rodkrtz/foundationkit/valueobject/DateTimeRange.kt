@@ -13,7 +13,7 @@ import java.time.Instant
  * @property end The end instant (inclusive)
  * @throws IllegalArgumentException if start is not before end
  */
-data class DateTimeRange(
+public data class DateTimeRange(
     val start: Instant,
     val end: Instant
 ) : ValueObject {
@@ -29,7 +29,7 @@ data class DateTimeRange(
      *
      * @return Duration between start and end
      */
-    fun duration(): Duration = Duration.between(start, end)
+    public fun duration(): Duration = Duration.between(start, end)
 
     /**
      * Checks if an instant falls within this time interval (inclusive).
@@ -37,7 +37,7 @@ data class DateTimeRange(
      * @param instant The instant to check
      * @return true if the instant is within the interval (inclusive)
      */
-    fun contains(instant: Instant): Boolean {
+    public fun contains(instant: Instant): Boolean {
         return !instant.isBefore(start) && !instant.isAfter(end)
     }
 
@@ -49,7 +49,7 @@ data class DateTimeRange(
      * @param other The other time interval
      * @return true if the intervals overlap
      */
-    fun overlaps(other: DateTimeRange): Boolean {
+    public fun overlaps(other: DateTimeRange): Boolean {
         return start.isBefore(other.end) && end.isAfter(other.start)
     }
 
@@ -59,7 +59,7 @@ data class DateTimeRange(
      * @param other The containing interval
      * @return true if this interval is completely within the other
      */
-    fun isWithin(other: DateTimeRange): Boolean {
+    public fun isWithin(other: DateTimeRange): Boolean {
         return !start.isBefore(other.start) && !end.isAfter(other.end)
     }
 
@@ -69,18 +69,18 @@ data class DateTimeRange(
      * @param other The contained interval
      * @return true if this interval completely contains the other
      */
-    fun contains(other: DateTimeRange): Boolean {
+    public fun contains(other: DateTimeRange): Boolean {
         return !other.start.isBefore(start) && !other.end.isAfter(end)
     }
 
-    companion object {
+    public companion object {
         /**
          * Creates an interval starting now and extending for a given duration.
          *
          * @param duration The duration of the interval
          * @return A new DateTimeRange starting from now
          */
-        fun fromNow(duration: Duration): DateTimeRange {
+        public fun fromNow(duration: Duration): DateTimeRange {
             val now = Instant.now()
             return DateTimeRange(now, now.plus(duration))
         }
@@ -92,7 +92,7 @@ data class DateTimeRange(
          * @param duration The duration of the interval
          * @return A new DateTimeRange with the specified start and duration
          */
-        fun of(start: Instant, duration: Duration): DateTimeRange {
+        public fun of(start: Instant, duration: Duration): DateTimeRange {
             return DateTimeRange(start, start.plus(duration))
         }
     }

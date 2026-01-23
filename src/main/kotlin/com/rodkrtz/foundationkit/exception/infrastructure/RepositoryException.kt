@@ -22,10 +22,10 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class RepositoryException(
+public class RepositoryException(
     message: String,
-    val entityType: String,
-    val operation: String,
+    public val entityType: String,
+    public val operation: String,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause) {
 

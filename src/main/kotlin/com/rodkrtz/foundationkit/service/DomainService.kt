@@ -195,4 +195,4 @@ package com.rodkrtz.foundationkit.service
  * }
  * ```
  */
-interface DomainService
+public interface DomainService

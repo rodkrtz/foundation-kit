@@ -18,7 +18,7 @@ package com.rodkrtz.foundationkit.query
  * val user = queryBus.dispatch(query)
  * ```
  */
-interface QueryBus {
+public interface QueryBus {
     /**
      * Dispatches a query to its registered handler.
      *
@@ -28,5 +28,5 @@ interface QueryBus {
      * @return The result from the query handler
      * @throws IllegalStateException if no handler is registered for the query
      */
-    fun <Q : Query<R>, R> dispatch(query: Q): R
+    public fun <Q : Query<R>, R> dispatch(query: Q): R
 }

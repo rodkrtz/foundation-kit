@@ -35,9 +35,9 @@ package com.rodkrtz.foundationkit.exception.domain
  * @param message The main error message
  * @param errors Map of field names to lists of error messages
  */
-class ValidationException(
+public class ValidationException(
     message: String,
-    val errors: Map<String, List<String>> = emptyMap()
+    public val errors: Map<String, List<String>> = emptyMap()
 ) : DomainException(message) {
     /**
      * Convenience constructor for single errors per field.
@@ -45,7 +45,7 @@ class ValidationException(
      * @param message The main error message
      * @param errors Variable number of field-to-error pairs
      */
-    constructor(message: String, vararg errors: Pair<String, String>) : this(
+    public constructor(message: String, vararg errors: Pair<String, String>) : this(
         message,
         errors.groupBy({ it.first }, { it.second })
     )

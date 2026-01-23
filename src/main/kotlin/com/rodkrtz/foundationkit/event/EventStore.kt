@@ -27,13 +27,13 @@ import com.rodkrtz.foundationkit.event.DomainEvent
  * val aggregate = AggregateRoot.fromEvents(history)
  * ```
  */
-interface EventStore {
+public interface EventStore {
     /**
      * Persists a single domain event.
      *
      * @param event The event to persist
      */
-    fun save(event: DomainEvent)
+    public fun save(event: DomainEvent)
 
     /**
      * Persists multiple domain events in order.
@@ -43,7 +43,7 @@ interface EventStore {
      *
      * @param events The list of events to persist
      */
-    fun save(events: List<DomainEvent>) {
+    public fun save(events: List<DomainEvent>) {
         events.forEach { save(it) }
     }
 
@@ -56,7 +56,7 @@ interface EventStore {
      * @param aggregateId The unique identifier of the aggregate
      * @return List of events in chronological order
      */
-    fun getEventsForAggregate(aggregateId: String): List<DomainEvent>
+    public fun getEventsForAggregate(aggregateId: String): List<DomainEvent>
 
     /**
      * Retrieves all events from the store.
@@ -66,5 +66,5 @@ interface EventStore {
      *
      * @return List of all events in chronological order
      */
-    fun getAllEvents(): List<DomainEvent>
+    public fun getAllEvents(): List<DomainEvent>
 }

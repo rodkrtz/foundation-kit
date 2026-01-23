@@ -11,10 +11,10 @@ package com.rodkrtz.foundationkit.aggregate
  *
  * @param ID The type of the entity identifier (must extend AggregateId)
  */
-abstract class Entity<ID : AggregateId<*>> {
+public abstract class Entity<ID : AggregateId<*>> {
 
     /** Unique identifier of the entity */
-    abstract val id: ID
+    public abstract val id: ID
 
     /**
      * Checks equality based on identifier.

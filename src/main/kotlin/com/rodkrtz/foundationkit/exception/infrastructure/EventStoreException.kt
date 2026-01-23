@@ -20,9 +20,9 @@ package com.rodkrtz.foundationkit.exception.infrastructure
  * }
  * ```
  */
-class EventStoreException(
+public class EventStoreException(
     message: String,
-    val streamId: String,
-    val operation: String,
+    public val streamId: String,
+    public val operation: String,
     cause: Throwable? = null
 ) : InfrastructureException(message, cause)

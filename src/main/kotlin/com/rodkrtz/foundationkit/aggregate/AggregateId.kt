@@ -28,7 +28,7 @@ package com.rodkrtz.foundationkit.aggregate
  * }
  *
  * // Long-based ID (for auto-increment databases)
- * data class ProductId(override val value: Long) : AggregateId<Long>(value)
+ * data class ProductId(override val value: Long) : AggregateId<Long>
  *
  * // Usage
  * val userId1 = UserId.generate()
@@ -44,31 +44,8 @@ package com.rodkrtz.foundationkit.aggregate
  * // findUser(orderId) // Compile error! Type safety
  * ```
  *
- * @param T The underlying type of the identifier (e.g., UUID, String, Long)
- * @property value The actual identifier value
+ * @property value The actual identifier value (e.g., UUID, String, Long)
  */
-abstract class AggregateId<T>(open val value: T) {
-
-    /**
-     * Checks equality based on the identifier value.
-     *
-     * Two aggregate IDs are equal if their values are equal and they are
-     * of the same type.
-     */
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        other as AggregateId<*>
-        return value == other.value
-    }
-
-    /**
-     * Returns hash code based on the identifier value.
-     */
-    override fun hashCode(): Int = value?.hashCode() ?: 0
-
-    /**
-     * Returns string representation of the identifier value.
-     */
-    override fun toString(): String = value.toString()
+public interface AggregateId<T> {
+    public val value: T
 }

@@ -12,7 +12,7 @@ package com.rodkrtz.foundationkit.repository
  * @property pageSize The number of elements per page
  * @property totalElements The total number of elements across all pages
  */
-data class Page<T>(
+public data class Page<T>(
     val content: List<T>,
     val pageNumber: Int,
     val pageSize: Int,
