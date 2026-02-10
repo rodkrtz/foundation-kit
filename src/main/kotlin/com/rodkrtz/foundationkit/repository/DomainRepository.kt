@@ -54,6 +54,14 @@ public interface DomainRepository<T : AggregateRoot<ID>, ID : AggregateId<*>> {
     public fun findAll(): List<T>
 
     /**
+     * Retrieves a page of aggregates.
+     *
+     * @param pageRequest The pagination information
+     * @return A page of aggregates
+     */
+    public fun findAll(pageRequest: PageRequest): Page<T>
+
+    /**
      * Deletes an aggregate by its identifier.
      *
      * Note: Consider using soft delete (marking as deleted) instead of

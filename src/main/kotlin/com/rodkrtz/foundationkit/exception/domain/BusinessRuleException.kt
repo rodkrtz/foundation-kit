@@ -28,7 +28,7 @@ package com.rodkrtz.foundationkit.exception.domain
  * @param message Description of the rule violation
  * @param ruleName Optional name of the violated rule (useful for logging/monitoring)
  */
-public class BusinessRuleException(
+public open class BusinessRuleException(
     message: String,
     public val ruleName: String? = null
 ) : DomainException(message)

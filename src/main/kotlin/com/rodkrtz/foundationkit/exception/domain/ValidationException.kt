@@ -35,7 +35,7 @@ package com.rodkrtz.foundationkit.exception.domain
  * @param message The main error message
  * @param errors Map of field names to lists of error messages
  */
-public class ValidationException(
+public open class ValidationException(
     message: String,
     public val errors: Map<String, List<String>> = emptyMap()
 ) : DomainException(message) {

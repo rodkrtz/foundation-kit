@@ -11,7 +11,7 @@ plugins {
 // Project Information
 // ============================================
 group = "com.rodkrtz"
-version = "1.0.0"
+version = "1.0.1"
 
 // ============================================
 // Java/Kotlin Configuration

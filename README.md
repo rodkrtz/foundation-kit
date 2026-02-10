@@ -5,7 +5,7 @@ A comprehensive architectural toolkit for Kotlin projects following DDD principl
 ## Installation
 ```kotlin
 dependencies {
-    implementation("com.rodkrtz:foundation-kit:1.0.0")
+    implementation("com.rodkrtz:foundation-kit:1.0.1")
 }
 ```
 

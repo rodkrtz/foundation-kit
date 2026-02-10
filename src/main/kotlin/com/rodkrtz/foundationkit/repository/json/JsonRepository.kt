@@ -1,5 +1,6 @@
 package com.rodkrtz.foundationkit.repository.json
 
+import com.rodkrtz.foundationkit.metadata.Metadata
 import com.rodkrtz.foundationkit.repository.Page
 import com.rodkrtz.foundationkit.repository.PageRequest
 
@@ -101,15 +102,4 @@ public interface JsonRepository<ID, DATA> {
      * @return List of entities whose metadata matches the predicate
      */
     public fun findByMetadata(predicate: (Metadata) -> Boolean): List<JsonData<ID, DATA>>
-
-    /**
-     * Finds entities by a tag in their metadata.
-     *
-     * Tags are key-value pairs stored in the metadata for flexible categorization.
-     *
-     * @param key The tag key
-     * @param value The tag value
-     * @return List of entities with the matching tag
-     */
-    public fun findByTag(key: String, value: String): List<JsonData<ID, DATA>>
 }

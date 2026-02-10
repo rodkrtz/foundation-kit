@@ -1,7 +1,6 @@
 package com.rodkrtz.foundationkit.event
 
 import java.time.Instant
-import java.util.UUID
 
 /**
  * Marker interface for domain events.
@@ -24,21 +23,15 @@ import java.util.UUID
 public interface DomainEvent {
     /**
      * The timestamp when the event occurred.
-     * WARNING: Default implementation generates current time on each access.
-     * Override with a stored value in implementations.
      *
      * @return The instant when the event occurred
      */
     public val occurredOn: Instant
-        get() = Instant.now()
 
     /**
      * Unique identifier for this event instance.
-     * WARNING: Default implementation generates a new UUID on each access.
-     * Override with a stored value in implementations.
      *
      * @return Unique event identifier
      */
     public val eventId: String
-        get() = UUID.randomUUID().toString()
 }

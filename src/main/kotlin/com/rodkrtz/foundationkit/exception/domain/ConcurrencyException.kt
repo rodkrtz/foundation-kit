@@ -35,7 +35,7 @@ package com.rodkrtz.foundationkit.exception.domain
  * @param expectedVersion Optional version that was expected
  * @param actualVersion Optional actual current version
  */
-public class ConcurrencyException(
+public open class ConcurrencyException(
     message: String = "Concurrent modification detected",
     public val aggregateId: String? = null,
     public val expectedVersion: Long? = null,

@@ -1,5 +1,9 @@
 package com.rodkrtz.foundationkit.repository.json
 
+import com.rodkrtz.foundationkit.metadata.Metadata
+import com.rodkrtz.foundationkit.metadata.OperationType
+import java.time.Instant
+
 /**
  * Generic entity for JSON-based persistence.
  *
@@ -34,7 +38,26 @@ package com.rodkrtz.foundationkit.repository.json
  *     role = "ADMIN",
  *     active = true
  * )
- * val metadata = Metadata.create(createdBy = "system")
+ * val metadata = Metadata(
+ *     audit = AuditInfo(
+ *         createdAt = Instant.now(),
+ *         createdBy = "system",
+ *         updatedAt = null,
+ *         updatedBy = null,
+ *         deletedAt = null,
+ *         deletedBy = null,
+ *         version = 1
+ *     ),
+ *     operation = OperationInfo(
+ *         type = OperationType.CREATE,
+ *         source = "api",
+ *         tenantId = null
+ *     ),
+ *     trace = null,
+ *     build = null,
+ *     runtime = null,
+ *     request = null
+ * )
  * 
  * val jsonData = JsonData(
  *     id = userId,
@@ -47,29 +70,19 @@ package com.rodkrtz.foundationkit.repository.json
  * val updated = jsonData.updateData(updatedData, updatedBy = "admin")
  *
  * println(updated.data.name)       // "John Smith"
- * println(updated.metadata.version) // 2
- * println(updated.metadata.updatedBy) // "admin"
+ * println(updated.metadata.audit.version) // 2
+ * println(updated.metadata.audit.updatedBy) // "admin"
  *
  * // Soft delete
  * val deleted = updated.softDelete(deletedBy = "admin")
  * println(deleted.isDeleted())     // true
- * println(deleted.metadata.deleted) // true
- * println(deleted.metadata.deletedAt) // 2026-01-21T...
+ * println(deleted.metadata.audit.deletedAt) // 2026-01-21T...
  *
  * // Check version for optimistic locking
  * val currentVersion = jsonData.getVersion() // 1
  * if (currentVersion != expectedVersion) {
  *     throw ConcurrencyException("Data was modified by another user")
  * }
- *
- * // With tags for categorization
- * val metadata = Metadata.create(createdBy = "system").copy(
- *     tags = mapOf(
- *         "department" to "IT",
- *         "priority" to "high",
- *         "project" to "migration"
- *     )
- * )
  *
  * // Repository usage
  * class UserJsonRepository(
@@ -133,11 +146,20 @@ public data class JsonData<ID, DATA>(
      * @return New JsonData with updated data and metadata
      */
     public fun updateData(newData: DATA, updatedBy: String? = null): JsonData<ID, DATA> {
+        val now = Instant.now()
+        val updatedAudit = metadata.audit.copy(
+            updatedAt = now,
+            updatedBy = updatedBy ?: metadata.audit.updatedBy,
+            version = metadata.audit.version + 1
+        )
+        val updatedOperation = metadata.operation.copy(type = OperationType.UPDATE)
+
         return copy(
             data = newData,
-            metadata = metadata.incrementVersion().let {
-                if (updatedBy != null) it.updateBy(updatedBy) else it
-            }
+            metadata = metadata.copy(
+                audit = updatedAudit,
+                operation = updatedOperation
+            )
         )
     }
 
@@ -151,8 +173,21 @@ public data class JsonData<ID, DATA>(
      * @return New JsonData marked as deleted
      */
     public fun softDelete(deletedBy: String? = null): JsonData<ID, DATA> {
+        val now = Instant.now()
+        val deletedAudit = metadata.audit.copy(
+            deletedAt = now,
+            deletedBy = deletedBy ?: metadata.audit.deletedBy,
+            updatedAt = now,
+            updatedBy = deletedBy ?: metadata.audit.updatedBy,
+            version = metadata.audit.version + 1
+        )
+        val deletedOperation = metadata.operation.copy(type = OperationType.DELETE)
+
         return copy(
-            metadata = metadata.markAsDeleted(deletedBy)
+            metadata = metadata.copy(
+                audit = deletedAudit,
+                operation = deletedOperation
+            )
         )
     }
 
@@ -161,12 +196,12 @@ public data class JsonData<ID, DATA>(
      *
      * @return true if marked as deleted
      */
-    public fun isDeleted(): Boolean = metadata.deleted
+    public fun isDeleted(): Boolean = metadata.audit.deletedAt != null
 
     /**
      * Gets the current version number for optimistic locking.
      *
      * @return Current version number
      */
-    public fun getVersion(): Long = metadata.version
+    public fun getVersion(): Long = metadata.audit.version
 }

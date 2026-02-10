@@ -1,5 +1,7 @@
 package com.rodkrtz.foundationkit.repository.json
 
+import com.rodkrtz.foundationkit.metadata.Metadata
+
 /**
  * Abstract base class with common implementations for JsonRepository.
  *
@@ -62,21 +64,5 @@ public abstract class JsonRepositorySupport<ID, DATA> : JsonRepository<ID, DATA>
      */
     override fun findByMetadata(predicate: (Metadata) -> Boolean): List<JsonData<ID, DATA>> {
         return findAll(includeDeleted = true).filter { predicate(it.metadata) }
-    }
-
-    /**
-     * Finds entities by a tag in their metadata.
-     *
-     * This default implementation uses findByMetadata.
-     * Override for better performance with database-specific queries.
-     *
-     * @param key The tag key
-     * @param value The tag value
-     * @return List of entities with the matching tag
-     */
-    override fun findByTag(key: String, value: String): List<JsonData<ID, DATA>> {
-        return findByMetadata { metadata ->
-            metadata.tags[key] == value
-        }
     }
 }

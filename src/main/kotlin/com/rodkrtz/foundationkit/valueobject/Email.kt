@@ -49,7 +49,7 @@ public data class Email(val value: String) : ValueObject {
     public companion object {
         /** RFC 5322 simplified regex for email validation */
         private val EMAIL_REGEX = Regex(
-            """^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$"""
+            """^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"""
         )
 
         /**
@@ -61,7 +61,7 @@ public data class Email(val value: String) : ValueObject {
         public fun tryParse(value: String): Email? {
             return try {
                 Email(value)
-            } catch (e: IllegalArgumentException) {
+            } catch (_: IllegalArgumentException) {
                 null
             }
         }
