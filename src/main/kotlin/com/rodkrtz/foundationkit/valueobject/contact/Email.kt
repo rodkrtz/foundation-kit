@@ -1,4 +1,6 @@
-package com.rodkrtz.foundationkit.valueobject
+package com.rodkrtz.foundationkit.valueobject.contact
+
+import com.rodkrtz.foundationkit.valueobject.ValueObject
 
 /**
  * Value object representing a valid email address.

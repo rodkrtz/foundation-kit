@@ -1,5 +1,6 @@
 package com.rodkrtz.foundationkit.repository.json
 
+import com.rodkrtz.foundationkit.exception.domain.ConcurrencyException
 import com.rodkrtz.foundationkit.metadata.Metadata
 import com.rodkrtz.foundationkit.metadata.OperationType
 import java.time.Instant
@@ -172,7 +173,18 @@ public data class JsonData<ID, DATA>(
      * @param deletedBy Optional identifier of who deleted the data
      * @return New JsonData marked as deleted
      */
-    public fun softDelete(deletedBy: String? = null): JsonData<ID, DATA> {
+    public fun softDelete(
+        deletedBy: String? = null,
+        expectedVersion: Long? = null
+    ): JsonData<ID, DATA> {
+        if (expectedVersion != null && expectedVersion != metadata.audit.version) {
+            throw ConcurrencyException(
+                message = "Version conflict while soft deleting json entity",
+                expectedVersion = expectedVersion,
+                actualVersion = metadata.audit.version
+            )
+        }
+
         val now = Instant.now()
         val deletedAudit = metadata.audit.copy(
             deletedAt = now,

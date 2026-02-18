@@ -44,11 +44,16 @@ public abstract class JsonRepositorySupport<ID, DATA> : JsonRepository<ID, DATA>
      *
      * @param id The identifier of the entity to soft delete
      * @param deletedBy Optional identifier of who performed the deletion
+     * @param expectedVersion Optional expected version for optimistic locking checks
      * @return The soft-deleted entity if found, null otherwise
      */
-    override fun softDeleteById(id: ID, deletedBy: String?): JsonData<ID, DATA>? {
+    override fun softDeleteById(
+        id: ID,
+        deletedBy: String?,
+        expectedVersion: Long?
+    ): JsonData<ID, DATA>? {
         val entity = findById(id) ?: return null
-        val deletedEntity = entity.softDelete(deletedBy)
+        val deletedEntity = entity.softDelete(deletedBy, expectedVersion)
         return save(deletedEntity)
     }
 
@@ -63,6 +68,9 @@ public abstract class JsonRepositorySupport<ID, DATA> : JsonRepository<ID, DATA>
      * @return List of entities whose metadata matches the predicate
      */
     override fun findByMetadata(predicate: (Metadata) -> Boolean): List<JsonData<ID, DATA>> {
-        return findAll(includeDeleted = true).filter { predicate(it.metadata) }
+        throw UnsupportedOperationException(
+            "findByMetadata default implementation was removed. " +
+                "Override this method using repository-specific indexed queries."
+        )
     }
 }

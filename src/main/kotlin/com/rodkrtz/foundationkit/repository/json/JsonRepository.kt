@@ -79,9 +79,26 @@ public interface JsonRepository<ID, DATA> {
      *
      * @param id The entity identifier to soft delete
      * @param deletedBy Optional user identifier who performed the deletion
+     * @param expectedVersion Optional expected version for optimistic locking checks
      * @return The soft-deleted entity if found, null otherwise
      */
-    public fun softDeleteById(id: ID, deletedBy: String? = null): JsonData<ID, DATA>?
+    public fun softDeleteById(
+        id: ID,
+        deletedBy: String? = null,
+        expectedVersion: Long? = null
+    ): JsonData<ID, DATA>?
+
+    /**
+     * Finds entities using a typed JSON filter.
+     *
+     * Implementations should map this filter to parameterized database queries.
+     * Override in concrete repositories when filter support is needed.
+     *
+     * @param filter Typed filter with field, operator and value
+     * @return List of entities matching the filter
+     */
+    public fun findByFilter(filter: JsonFilter): List<JsonData<ID, DATA>> =
+        throw UnsupportedOperationException("findByFilter must be implemented by concrete repositories")
 
     /**
      * Finds entities using a JSONPath query.
@@ -93,6 +110,10 @@ public interface JsonRepository<ID, DATA> {
      * @param jsonPath The JSONPath query string (database-specific syntax)
      * @return List of entities matching the query
      */
+    @Deprecated(
+        message = "Prefer findByFilter for typed and safer query definitions",
+        replaceWith = ReplaceWith("findByFilter(filter)")
+    )
     public fun findByJsonPath(jsonPath: String): List<JsonData<ID, DATA>>
 
     /**

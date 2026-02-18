@@ -11,7 +11,7 @@ plugins {
 // Project Information
 // ============================================
 group = "com.rodkrtz"
-version = "1.0.1"
+version = "1.2.0"
 
 // ============================================
 // Java/Kotlin Configuration
@@ -56,36 +56,21 @@ repositories {
 // Dependencies
 // ============================================
 dependencies {
+    implementation("jakarta.validation:jakarta.validation-api:3.1.1")
+
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
     testImplementation("io.mockk:mockk:1.13.8")
     testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
-// ============================================
-// Load .env file for credentials
-// ============================================
-val envFile: File? = rootProject.file(".env")
-if (envFile != null && envFile.exists() && envFile.isFile) {
-    println("Loading credentials from .env file")
+val githubUsernameProvider = providers
+    .environmentVariable("GITHUB_USERNAME")
+    .orElse(providers.gradleProperty("gpr.user"))
 
-    envFile.readLines().forEach { line ->
-        val trimmedLine = line.trim()
-
-        if (trimmedLine.isNotBlank() && !trimmedLine.startsWith("#")) {
-            val parts = trimmedLine.split("=", limit = 2)
-
-            if (parts.size == 2) {
-                val key = parts[0].trim()
-                val value = parts[1].trim()
-                val cleanValue = value.removeSurrounding("\"").removeSurrounding("'")
-                System.setProperty(key, cleanValue)
-            }
-        }
-    }
-} else {
-    println("No .env file found, using environment variables")
-}
+val githubTokenProvider = providers
+    .environmentVariable("GITHUB_TOKEN")
+    .orElse(providers.gradleProperty("gpr.token"))
 
 // ============================================
 // Publishing Configuration
@@ -97,13 +82,8 @@ publishing {
             url = uri("https://maven.pkg.github.com/rodkrtz/foundation-kit")
 
             credentials {
-                username = System.getProperty("GITHUB_USERNAME")
-                    ?: System.getenv("GITHUB_USERNAME")
-                    ?: project.findProperty("gpr.user") as String?
-
-                password = System.getProperty("GITHUB_TOKEN")
-                    ?: System.getenv("GITHUB_TOKEN")
-                    ?: project.findProperty("gpr.token") as String?
+                username = githubUsernameProvider.orNull
+                password = githubTokenProvider.orNull
             }
         }
     }
@@ -188,10 +168,8 @@ tasks.register("verifyCredentials") {
     description = "Verify that GitHub credentials are configured"
 
     doLast {
-        val username = System.getProperty("GITHUB_USERNAME")
-            ?: System.getenv("GITHUB_USERNAME")
-        val token = System.getProperty("GITHUB_TOKEN")
-            ?: System.getenv("GITHUB_TOKEN")
+        val username = githubUsernameProvider.orNull
+        val token = githubTokenProvider.orNull
 
         if (username.isNullOrBlank() || token.isNullOrBlank()) {
             throw GradleException(
@@ -199,23 +177,17 @@ tasks.register("verifyCredentials") {
                 GitHub credentials not found!
                 
                 Please configure credentials in one of these ways:
-                
-                1. .env file in project root:
-                   GITHUB_USERNAME=your-username
-                   GITHUB_TOKEN=your-token
-                
-                2. ~/.gradle/gradle.properties:
+
+                1. ~/.gradle/gradle.properties:
                    gpr.user=your-username
                    gpr.token=your-token
                 
-                3. Environment variables:
+                2. Environment variables:
                    export GITHUB_USERNAME=your-username
                    export GITHUB_TOKEN=your-token
             """.trimIndent()
             )
         }
-
-        println("✓ GitHub credentials found for user: $username")
     }
 }
 
