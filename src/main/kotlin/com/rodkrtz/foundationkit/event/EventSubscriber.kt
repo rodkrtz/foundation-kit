@@ -1,7 +1,5 @@
 package com.rodkrtz.foundationkit.event
 
-import com.rodkrtz.foundationkit.event.DomainEvent
-
 /**
  * Subscriber for domain events.
  *
@@ -29,7 +27,7 @@ import com.rodkrtz.foundationkit.event.DomainEvent
  *
  * @param T The specific type of domain event this subscriber handles
  */
-public interface EventSubscriber<T : DomainEvent> {
+public interface EventSubscriber<T : DomainEvent<*>> {
     /**
      * Handles a domain event of the subscribed type.
      *
@@ -43,5 +41,5 @@ public interface EventSubscriber<T : DomainEvent> {
      * @param event The event to check
      * @return true if this subscriber should handle the event
      */
-    public fun isSubscribedTo(event: DomainEvent): Boolean
+    public fun isSubscribedTo(event: DomainEvent<*>): Boolean
 }

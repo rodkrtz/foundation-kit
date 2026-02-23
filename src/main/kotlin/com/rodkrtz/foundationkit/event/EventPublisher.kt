@@ -1,7 +1,5 @@
 package com.rodkrtz.foundationkit.event
 
-import com.rodkrtz.foundationkit.event.DomainEvent
-
 /**
  * Publisher for domain events.
  *
@@ -26,7 +24,7 @@ public interface EventPublisher {
      *
      * @param event The event to publish
      */
-    public fun publish(event: DomainEvent)
+    public fun publish(event: DomainEvent<*>)
 
     /**
      * Publishes multiple domain events in order.
@@ -36,7 +34,7 @@ public interface EventPublisher {
      *
      * @param events The list of events to publish
      */
-    public fun publish(events: List<DomainEvent>) {
+    public fun publish(events: List<DomainEvent<*>>) {
         events.forEach { publish(it) }
     }
 }

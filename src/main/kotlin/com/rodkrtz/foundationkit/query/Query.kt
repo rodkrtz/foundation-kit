@@ -1,7 +1,5 @@
 package com.rodkrtz.foundationkit.query
 
-import java.util.UUID
-
 /**
  * Marker interface for queries in CQRS pattern.
  *
@@ -158,14 +156,11 @@ import java.util.UUID
  *
  * @param R The type of result returned by this query
  */
-public interface Query<R> {
+public interface Query<ID> {
     /**
      * Unique identifier for this query instance.
-     * WARNING: Default implementation generates a new UUID on each access.
-     * Override with a stored value in implementations.
      *
      * @return Unique query identifier
      */
-    public val queryId: String
-        get() = UUID.randomUUID().toString()
+    public val queryId: ID
 }

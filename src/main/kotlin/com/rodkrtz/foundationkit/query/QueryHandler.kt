@@ -291,7 +291,7 @@ package com.rodkrtz.foundationkit.query
  * @param Q The type of query this handler processes
  * @param R The type of result returned
  */
-public interface QueryHandler<Q : Query<R>, R> {
+public interface QueryHandler<Q : Query<*>, R> {
     /**
      * Handles the given query and returns the result.
      *

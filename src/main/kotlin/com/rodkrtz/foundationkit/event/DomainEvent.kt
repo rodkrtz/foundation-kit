@@ -20,7 +20,7 @@ import java.time.Instant
  *
  * Examples: UserRegistered, OrderPlaced, PaymentProcessed, RideCompleted
  */
-public interface DomainEvent {
+public interface DomainEvent<ID> {
     /**
      * The timestamp when the event occurred.
      *
@@ -33,5 +33,5 @@ public interface DomainEvent {
      *
      * @return Unique event identifier
      */
-    public val eventId: String
+    public val eventId: ID
 }

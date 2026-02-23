@@ -28,5 +28,5 @@ public interface CommandBus {
      * @return The result from the command handler
      * @throws IllegalStateException if no handler is registered for the command
      */
-    public fun <C : Command, R> dispatch(command: C): R
+    public fun <C : Command<*>, R> dispatch(command: C): R
 }

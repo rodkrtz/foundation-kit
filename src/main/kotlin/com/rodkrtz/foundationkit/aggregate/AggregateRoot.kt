@@ -87,7 +87,7 @@ import com.rodkrtz.foundationkit.event.DomainEvent
 public abstract class AggregateRoot<ID : AggregateId<*>> : Entity<ID>() {
 
     /** List of domain events recorded but not yet published */
-    private val domainEvents = mutableListOf<DomainEvent>()
+    private val domainEvents = mutableListOf<DomainEvent<*>>()
 
     /**
      * Adds a domain event to be published later.
@@ -98,7 +98,7 @@ public abstract class AggregateRoot<ID : AggregateId<*>> : Entity<ID>() {
      *
      * @param event The domain event to record
      */
-    protected fun addDomainEvent(event: DomainEvent) {
+    protected fun addDomainEvent(event: DomainEvent<*>) {
         domainEvents.add(event)
     }
 
@@ -109,7 +109,7 @@ public abstract class AggregateRoot<ID : AggregateId<*>> : Entity<ID>() {
      *
      * @return Immutable list of domain events
      */
-    public fun getDomainEvents(): List<DomainEvent> = domainEvents.toList()
+    public fun getDomainEvents(): List<DomainEvent<*>> = domainEvents.toList()
 
     /**
      * Clears all recorded domain events.

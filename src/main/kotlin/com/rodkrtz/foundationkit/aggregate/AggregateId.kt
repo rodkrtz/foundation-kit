@@ -1,5 +1,7 @@
 package com.rodkrtz.foundationkit.aggregate
 
+import java.io.Serializable
+
 /**
  * Base class for aggregate identifiers.
  *
@@ -46,6 +48,6 @@ package com.rodkrtz.foundationkit.aggregate
  *
  * @property value The actual identifier value (e.g., UUID, String, Long)
  */
-public interface AggregateId<T> {
+public interface AggregateId<T> : Serializable {
     public val value: T
 }

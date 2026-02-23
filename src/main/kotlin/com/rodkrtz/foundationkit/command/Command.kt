@@ -1,7 +1,6 @@
 package com.rodkrtz.foundationkit.command
 
 import java.time.Instant
-import java.util.UUID
 
 /**
  * Marker interface for commands in CQRS pattern.
@@ -128,20 +127,14 @@ import java.util.UUID
  * }
  * ```
  */
-public interface Command {
+public interface Command<ID> {
     /**
      * Unique identifier for this command instance.
-     * WARNING: Default implementation generates a new UUID on each access.
-     * Override with a stored value in implementations.
      */
-    public val commandId: String
-        get() = UUID.randomUUID().toString()
+    public val commandId: ID
 
     /**
      * Timestamp when the command was created.
-     * WARNING: Default implementation generates current time on each access.
-     * Override with a stored value in implementations.
      */
     public val timestamp: Instant
-        get() = Instant.now()
 }

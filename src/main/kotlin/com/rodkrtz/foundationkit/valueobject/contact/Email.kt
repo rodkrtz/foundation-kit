@@ -11,7 +11,7 @@ import com.rodkrtz.foundationkit.valueobject.ValueObject
  * @property value The email address string
  * @throws IllegalArgumentException if email is blank, invalid format, or too long
  */
-public data class Email(val value: String) : ValueObject {
+public data class Email(val value: String) : ValueObject { // TODO Tornar value class
 
     init {
         require(value.isNotBlank()) {

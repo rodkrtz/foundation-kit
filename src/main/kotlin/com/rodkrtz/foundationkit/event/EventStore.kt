@@ -1,6 +1,6 @@
 package com.rodkrtz.foundationkit.event
 
-import com.rodkrtz.foundationkit.event.DomainEvent
+import com.rodkrtz.foundationkit.aggregate.AggregateId
 
 /**
  * Event Store for persisting domain events.
@@ -33,7 +33,7 @@ public interface EventStore {
      *
      * @param event The event to persist
      */
-    public fun save(event: DomainEvent)
+    public fun save(event: DomainEvent<*>)
 
     /**
      * Persists multiple domain events in order.
@@ -43,7 +43,7 @@ public interface EventStore {
      *
      * @param events The list of events to persist
      */
-    public fun save(events: List<DomainEvent>) {
+    public fun save(events: List<DomainEvent<*>>) {
         events.forEach { save(it) }
     }
 
@@ -56,7 +56,7 @@ public interface EventStore {
      * @param aggregateId The unique identifier of the aggregate
      * @return List of events in chronological order
      */
-    public fun getEventsForAggregate(aggregateId: String): List<DomainEvent>
+    public fun getEventsForAggregate(aggregateId: AggregateId<*>): List<DomainEvent<*>>
 
     /**
      * Retrieves all events from the store.
@@ -66,5 +66,5 @@ public interface EventStore {
      *
      * @return List of all events in chronological order
      */
-    public fun getAllEvents(): List<DomainEvent>
+    public fun getAllEvents(): List<DomainEvent<*>>
 }

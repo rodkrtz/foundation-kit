@@ -28,5 +28,5 @@ public interface QueryBus {
      * @return The result from the query handler
      * @throws IllegalStateException if no handler is registered for the query
      */
-    public fun <Q : Query<R>, R> dispatch(query: Q): R
+    public fun <Q : Query<*>, R> dispatch(query: Q): R
 }
