@@ -48,6 +48,4 @@ import java.io.Serializable
  *
  * @property value The actual identifier value (e.g., UUID, String, Long)
  */
-public interface AggregateId<T> : Serializable {
-    public val value: T
-}
+public abstract class AggregateId<T>(public open val value: T) : Serializable
